@@ -1,0 +1,21 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+
+class PlaceLocation {
+  final double latitude;
+  final double longitude;
+  final String address;
+
+  const PlaceLocation(
+      {@required this.latitude, @required this.longitude, this.address});
+}
+
+class Place {
+  final String id;
+  final String title;
+  final PlaceLocationlocation;
+  final File image;
+
+  Place({@required this.id, @required this.title, @required this.PlaceLocationlocation, @required this.image});
+}
