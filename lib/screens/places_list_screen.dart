@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_loc/providers/great_places.dart';
 import 'package:flutter_loc/screens/add_place_screen.dart';
+import 'package:flutter_loc/screens/place_detail_screen.dart';
 import 'package:provider/provider.dart';
 
 class PlacesListScreen extends StatelessWidget {
@@ -34,12 +35,21 @@ class PlacesListScreen extends StatelessWidget {
                           ? ch
                           : ListView.builder(
                               itemBuilder: (ctx, i) => ListTile(
-                                leading: CircleAvatar(
-                                  backgroundImage:
-                                      FileImage(greatPlaces.places[i].image),
+                                leading: Hero(
+                                  tag: greatPlaces.places[i].id,
+                                  child: CircleAvatar(
+                                    backgroundImage:
+                                        FileImage(greatPlaces.places[i].image),
+                                  ),
                                 ),
                                 title: Text(greatPlaces.places[i].title),
-                                onTap: () {},
+                                subtitle: Text(greatPlaces
+                                    .places[i].placeLocation.address),
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(
+                                      PlaceDetailScreen.routeName,
+                                      arguments: greatPlaces.places[i].id);
+                                },
                               ),
                               itemCount: greatPlaces.places.length,
                             ),

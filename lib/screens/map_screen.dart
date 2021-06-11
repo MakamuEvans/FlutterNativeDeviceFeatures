@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_loc/models/plade.dart';
+import 'package:flutter_loc/models/place.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapScreen extends StatefulWidget {
@@ -46,9 +46,15 @@ class _MapScreenState extends State<MapScreen> {
                 widget.initialLocation.longitude),
             zoom: 16),
         onTap: widget.isSelecting ? _selectLocation : null,
-        markers: _pickedLocation == null
+        markers: _pickedLocation == null && widget.isSelecting == true
             ? {}
-            : {Marker(markerId: MarkerId('m1'), position: _pickedLocation)},
+            : {
+                Marker(
+                    markerId: MarkerId('m1'),
+                    position: _pickedLocation ??
+                        LatLng(widget.initialLocation.latitude,
+                            widget.initialLocation.longitude))
+              },
       ),
     );
   }
